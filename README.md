@@ -1,5 +1,6 @@
 # NYC-Collision-Data
 Project Write-up
+
 Dataset: I ended up using the NYC Motor Vehicle Collisions dataset, found here:
 https://catalog.data.gov/dataset/motor-vehicle-collisions-crashes/ which contains a wide
 variety of information about all recorded car accidents in NYC from 2011 to 2024.
@@ -24,10 +25,12 @@ complex data more accessible but also facilitate a deeper understanding of under
 trends and patterns. I also gained insights into the critical role of data analysis in informing
 evidence-based decision-making, particularly in the realm of urban transportation and
 safety.
+
 What went as expected: I knew the dataset had geospatial information in it – it recorded
 the coordinated of each accident reported. I intended to make maps in Tableau using that
 information from the beginning, and luckily, I was able to do the same without any hiccups.
 Using maps was the perfect way to visualize this dataset.
+
 What did NOT go as expected: I expected the size of the dataset would also mean lots of
 different columns and relationships to find. However, most of these columns would prove
 to be redundant or mostly empty. This limited the scope of this project.
