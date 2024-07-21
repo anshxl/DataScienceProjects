@@ -3,6 +3,7 @@ Project Write-up
 Dataset: I ended up using the NYC Motor Vehicle Collisions dataset, found here:
 https://catalog.data.gov/dataset/motor-vehicle-collisions-crashes/ which contains a wide
 variety of information about all recorded car accidents in NYC from 2011 to 2024.
+
 Questions:
 1. What are the leading causes of accidents in NYC? Is there a discernible pattern?
 2. What are possible solutions to these causes, if there are any?
@@ -14,6 +15,7 @@ same kind of accidents are happening in the same location, that means there is s
 one can do to prevent it. This could include an infrastructural decision, a technological
 advancement, or something as simple as a PSA. These solutions are discussed in the
 project poster.
+
 Learnings: I feel this project gave me insight into how the field of data science can be used
 in real-world, relevant, and meaningful situations. It is not limited to visualizing results
 from a lab, or making end-of-year business reports. With a good grasp of the fundamentals
