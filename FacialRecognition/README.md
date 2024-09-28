@@ -40,7 +40,7 @@ This project demonstrates the potential of SVM-based facial recognition systems 
 1. **Clone the repository**:
    ```sh
    git clone https://github.com/anshxl/DataScienceProjects.git
-   cd your-repo-name
+   cd DataScienceProjects
    ```
 2. Install the required libraries:
   ```sh
