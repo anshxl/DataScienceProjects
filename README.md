@@ -1,5 +1,4 @@
 # NYC-Collision-Data
-Project Write-up
 
 Dataset: I ended up using the NYC Motor Vehicle Collisions dataset, found here:
 https://catalog.data.gov/dataset/motor-vehicle-collisions-crashes/ which contains a wide
