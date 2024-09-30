@@ -4,7 +4,7 @@
 
 This project focuses on building a Natural Language Processing (NLP) model to classify tweets as related to real disasters or not. Using PyTorch, we implemented a BERT-based model to analyze tweet text, allowing for accurate classification of disaster-related tweets.
 
-The goal is to help organizations quickly identify relevant tweets during disaster events for better response and resource allocation.
+The goal is to help organizations quickly identify relevant tweets during disaster events for better response and resource allocation. The inspiration comes from a Kaggle competition I found helpful in building up skills in PyTorch.
 
 ## Dataset
 
@@ -50,6 +50,7 @@ We chose a BERT-based model for its strong performance in NLP tasks:
 ### 6. **Evaluation and Output**
 
 - The final model predictions were saved in a CSV file with columns `id` and `target` for easy interpretation.
+- Kaggle scored my submission to be a 0.8198, with the highest legitimate score on the leaderboard being 0.85.
 
 ## Requirements
 
