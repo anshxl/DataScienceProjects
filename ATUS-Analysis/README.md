@@ -1,5 +1,4 @@
-#### **Project Title:**  
-**Predicting Time Spent at Home: Insights from the American Time Use Survey**
+# **Predicting Time Spent at Home: Insights from the American Time Use Survey**
 
 #### **Objective:**  
 This project focuses on predicting the amount of time individuals spend at home daily based on various socio-economic and demographic factors. Using the American Time Use Survey (ATUS) data (2010-2019), the goal was to engineer meaningful features, preprocess the data effectively, and build robust predictive models.
@@ -37,7 +36,20 @@ This project focuses on predicting the amount of time individuals spend at home 
 ---
 
 #### **Conclusion:**  
-This project successfully demonstrated the ability to predict the time individuals spend at home using socio-economic factors from ATUS data. By focusing on robust feature engineering and advanced machine learning techniques, we derived actionable insights that could inform policymakers and researchers alike.
+
+This project successfully demonstrated the ability to predict the time individuals spend at home using socio-economic factors from the ATUS dataset. The best-performing model, LightGBM, achieved an RMSE of **3.371**, which translates to an error of approximately 3.371 hours in a 24-hour day. While this is a significant accomplishment, it’s important to contextualize the results within the broader scope of the data and the problem:
+
+1. **Comparison to Data Variability**:  
+   The standard deviation of time spent at home in the dataset was approximately **4.7 hours**, indicating substantial variability in the target variable. The model's performance, therefore, suggests it captures much of the systematic behavior in the data but cannot fully account for this inherent variability.
+
+2. **Limitations of the Data**:  
+   The quality of the ATUS data, while comprehensive, may include inaccuracies, reporting biases, or missing contextual factors that limit the model's ability to generalize. Factors like subjective interpretation of "time at home" and unrecorded variables (e.g., sudden life events, nuanced behavior patterns) could contribute to prediction errors.
+
+3. **Inherent Uncertainty in Human Behavior**:  
+   Human life is inherently random and influenced by countless unpredictable factors (e.g., spontaneous decisions, emergencies). This randomness inherently limits the precision of any predictive model in this context.
+
+#### Final Remarks
+Despite these limitations, the project highlights the potential of machine learning to analyze and predict human behavior at scale, offering valuable insights into socio-economic patterns. Future work could focus on enhancing data quality, incorporating additional contextual variables, or using ensemble approaches to further reduce error margins. However, it’s important to recognize the natural bounds of predictability for such complex and dynamic systems.
 
 #### **Future Work:**  
 - Incorporate post-COVID-19 datasets to analyze behavioral shifts.
