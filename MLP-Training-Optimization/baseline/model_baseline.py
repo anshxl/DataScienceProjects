@@ -4,11 +4,42 @@
 #Use cross-entropy loss function
 #Use Adam optimizer
 import numpy as np
-from adam import AdamOptimizer
 import time
+import sys
+import os
 from tqdm import tqdm  # type: ignore
 
+# Add the project root directory to sys.path
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+
+from adam import AdamOptimizer
+
+
 class NeuralNetwork:
+    """
+    A class representing a neural network model.
+
+    Parameters:
+    - input_size (int): The number of input nodes.
+    - hidden_size (int): The number of nodes in each hidden layer.
+    - output_size (int): The number of output nodes.
+
+    Methods:
+    - He_initialization(input_size, hidden_size): Initializes the weights using He initialization.
+    - init_params(input_size, hidden_size, output_size): Initializes the parameters of the neural network.
+    - relu(x): Applies the ReLU activation function to the input.
+    - softmax(x): Applies the softmax activation function to the input.
+    - cross_entropy_loss(y, y_hat): Computes the cross-entropy loss between the predicted and actual values.
+    - forward_propagation(X): Performs forward propagation to compute the output of the neural network.
+    - compute_gradients(X, y): Computes the gradients of the parameters with respect to the loss.
+    - train(X, y, learning_rate, epochs, verbose=True): Trains the neural network on the given data.
+    - predict(X): Predicts the output for the given input.
+    - evaluate(X, y): Evaluates the accuracy of the neural network on the given data.
+    - save_model(file_name): Saves the model parameters to a file.
+    - load_model(file_name): Loads the model parameters from a file.
+    - plot_loss(filename="loss_plot", format="png", show_inline=False, save=True): Plots the loss over epochs.
+    - plot_architecture(filename="model_architecture", format="png", show_inline=False): Plots the model architecture.
+    """
 
     def __init__(self, input_size, hidden_size, output_size):
         self.input_size = input_size
@@ -59,7 +90,7 @@ class NeuralNetwork:
         db1 = np.sum(dz1, axis=0, keepdims=True) / m
         return [dW1, db1, dW2, db2, dW3, db3]
 
-    def train(self, X, y, learning_rate, epochs):
+    def train(self, X, y, learning_rate, epochs, verbose=True):
         # self.init_params(X.shape[1], hidden_size, output_size)
         parameters = [self.W1, self.b1, self.W2, self.b2, self.W3, self.b3]
         adam = AdamOptimizer(parameters, learning_rate=learning_rate)
@@ -67,9 +98,22 @@ class NeuralNetwork:
         #Initialize list to store loss values
         self.loss_values = []
         
-        start_time = time.time()
-        with tqdm(range(epochs), desc="Training", unit="epoch") as pbar:
-            for i in pbar:
+        if verbose:
+            with tqdm(range(epochs), desc="Training", unit="epoch") as pbar:
+                for i in pbar:
+                    y_hat = self.forward_propagation(X)
+                    loss = self.cross_entropy_loss(y, y_hat)
+                    self.loss_values.append(loss)
+
+                    # Compute gradients and update weights
+                    gradients = self.compute_gradients(X, y)
+                    adam.update(gradients)
+                    self.W1, self.b1, self.W2, self.b2, self.W3, self.b3 = adam.parameters
+                    
+                    # Update the progress bar with the current loss
+                    pbar.set_postfix(loss=f'{loss:.4f}')
+        else:
+            for i in range(epochs):
                 y_hat = self.forward_propagation(X)
                 loss = self.cross_entropy_loss(y, y_hat)
                 self.loss_values.append(loss)
@@ -78,12 +122,6 @@ class NeuralNetwork:
                 gradients = self.compute_gradients(X, y)
                 adam.update(gradients)
                 self.W1, self.b1, self.W2, self.b2, self.W3, self.b3 = adam.parameters
-                
-                # Update the progress bar with the current loss
-                pbar.set_postfix(loss=f'{loss:.4f}')
-        
-        total_time = time.time() - start_time
-        print(f"Total training time: {total_time:.2f} seconds")
         
     def predict(self, X):
         return np.argmax(self.forward_propagation(X), axis=1)
@@ -107,7 +145,7 @@ class NeuralNetwork:
     def __len__(self):
         return self.hidden
     
-    def plot_loss(self, filename="loss_plot", format="png", show_inline=False, save=True):
+    def plot_loss(self, filename="loss_plot-NumPy", format="png", show_inline=False, save=True):
         try:
             import matplotlib.pyplot as plt #type: ignore
             from IPython.display import Image, display #type: ignore
@@ -117,13 +155,13 @@ class NeuralNetwork:
         plt.figure(figsize=(10, 6))
         plt.plot(self.loss_values)
         #plt.scatter(range(len(self.loss_values)), self.loss_values, color='r')
-        plt.title("Loss over epochs")
+        plt.title("Loss over epochs - Baseline Model")
         plt.xlabel("Epoch")
         plt.ylabel("Cross-entropy loss")
         plt.grid(True, alpha=0.5)
         plt.tight_layout()
         if save:
-            plt.savefig(f"plots/{filename}.{format}", format=format)
+            plt.savefig(f"{filename}.{format}", format=format)
             
     def plot_architecture(self, filename="model_architecture", format="png", show_inline=False):
         """

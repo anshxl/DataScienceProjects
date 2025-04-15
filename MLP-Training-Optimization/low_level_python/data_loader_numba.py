@@ -12,14 +12,6 @@ def transform_data(x):
     return x
 
 def load_data():
-    """
-    Loads and preprocesses the MNIST dataset.
-
-    Returns:
-        Tuple: A tuple containing the training and testing data and labels.
-            The training data and labels are further divided into x_train, y_train,
-            and the testing data and labels are divided into x_test, y_test.
-    """
     mnist = tensorflow.keras.datasets.mnist.load_data(
         path="mnist.npz"
     )
@@ -39,3 +31,15 @@ def load_data():
     y_test = one_hot_encode(y_test)
 
     return (x_train, y_train), (x_test, y_test)
+
+from numba.typed import List # type: ignore
+
+def to_typed_2d_list(py_list):
+    typed_list = List()
+    for row in py_list:
+        # Create a new typed list for each row.
+        typed_row = List()
+        for item in row:
+            typed_row.append(float(item))
+        typed_list.append(typed_row)
+    return typed_list
